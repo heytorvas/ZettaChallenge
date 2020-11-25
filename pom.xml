@@ -7,7 +7,6 @@
   
   <dependencies>
   
-
 		<!-- https://mvnrepository.com/artifact/org.glassfish/javax.faces -->
 		<dependency>
 			<groupId>org.glassfish</groupId>

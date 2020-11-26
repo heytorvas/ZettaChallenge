@@ -29,7 +29,7 @@ public class Repository<T extends DefaultEntity<? super T>> {
 		
 		catch (Exception e) {
 			e.printStackTrace();
-			throw new ApplicationException("Problema ao iniciar uma transa√ß√£o.");
+			throw new ApplicationException("Problema ao iniciar uma transacao.");
 		}
 	}
 	
@@ -60,7 +60,6 @@ public class Repository<T extends DefaultEntity<? super T>> {
 		try {
 			return getEntityManager().merge(entity);
 		} catch (ValidationException e) {
-			
 			System.out.println(e.getMessage());
 			throw e;
 		
@@ -69,7 +68,7 @@ public class Repository<T extends DefaultEntity<? super T>> {
 			throw new ApplicationException("Vers„o antiga. Erro de controle de concorrÍncia.");
 		} catch (Exception e) {
 			System.out.println("Erro no repositorio "
-					+ "ao executar o m√©todo merge.");
+					+ "ao executar o metodo merge.");
 			e.printStackTrace();
 			throw new ApplicationException("Erro ao salvar.");
 		} 

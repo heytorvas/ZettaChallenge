@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,6 +23,20 @@ public abstract class DefaultEntity<T> implements Serializable {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date registerDate;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updateDate;
+	
+	@PrePersist
+	private void atualizarDadosAntesInsert() {
+		this.registerDate = new Date();
+		this.updateDate = this.registerDate;
+	}
+		
+	@PreUpdate
+	private void atualizarDadosAntesUpdate() {
+		this.updateDate = new Date();
+	}
 
 	public Integer getId() {
 		return id;

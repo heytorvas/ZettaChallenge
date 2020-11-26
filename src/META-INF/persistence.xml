@@ -3,9 +3,7 @@
 	<persistence-unit name="ZettaChallenge">
 	
 		<class>model.DefaultEntity</class>
-		<class>model.Profile</class>
 		<class>model.Role</class>
-		<class>model.User</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.driver"

@@ -26,23 +26,47 @@
 				<h:panelGrid columns="4">
 					<h:commandButton value="Incluir"
 						disabled="#{roleController.entity.id != null}"
+						process="@form" update="@formDataTable" 
 						actionListener="#{roleController.save()}" />
-
 
 					<h:commandButton value="Alterar"
 						disabled="#{roleController.entity.id == null}"
-						actionListener="#{roleController.edit()}" />
+						process="@form" update="@formDataTable" 
+						actionListener="#{roleController.save()}" />
 
 
 					<h:commandButton value="Excluir"
 						disabled="#{roleController.entity.id == null}"
+						process="@form" update="@formDataTable" 
 						actionListener="#{roleController.delete()}" />
-
 
 					<h:commandButton value="Limpar"
 						actionListener="#{roleController.clear()}" />
 
 				</h:panelGrid>
+			</h:form>
+			
+			<h:form id="formDataTable">
+				<h:dataTable value="#{roleController.roleList}" var="obj"
+					styleClass="table" headerClass="table-header"
+					rowClasses="table-odd-row, table-even-row">
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+						<h:outputLabel value="#{obj.id}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:commandLink value="#{obj.name}" style="color: black;"
+							actionListener="#{roleController.edit(obj.id)}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Data de Cadastro</f:facet>
+						<h:outputLabel value="#{obj.registerDate}" />
+					</h:column>
+
+				</h:dataTable>
 			</h:form>
 		</center>
 	</h:body>

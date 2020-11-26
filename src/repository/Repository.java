@@ -9,6 +9,7 @@ import javax.validation.ValidationException;
 import factory.JPAFactory;
 import model.DefaultEntity;
 import util.ApplicationException;
+import util.Util;
 
 public class Repository<T extends DefaultEntity<? super T>> {
 	
@@ -58,7 +59,10 @@ public class Repository<T extends DefaultEntity<? super T>> {
 	
 	public T save(T entity) throws ApplicationException, ValidationException {
 		try {
-			return getEntityManager().merge(entity);
+			T em = getEntityManager().merge(entity);
+			Util.redirect("cargo.xhtml");
+			return em;
+			
 		} catch (ValidationException e) {
 			System.out.println(e.getMessage());
 			throw e;
@@ -75,16 +79,16 @@ public class Repository<T extends DefaultEntity<? super T>> {
 	}
 	
 	public void delete(T entity) throws ApplicationException {
-		
 		try {
 			
 			T obj = getEntityManager().merge(entity);
 			getEntityManager().remove(obj);
+			Util.redirect("cargo.xhtml");
 		} 
 		
 		catch (Exception e) {
 			
-			System.out.println("Erro no repositório ao executar o m�todo merge.");
+			System.out.println("Erro no repositorio ao executar o metodo merge.");
 			e.printStackTrace();
 			throw new ApplicationException("Erro ao salvar.");
 		}

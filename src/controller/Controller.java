@@ -32,6 +32,7 @@ public abstract class Controller<T extends DefaultEntity<? super T>> implements 
 			r.beginTransaction();
 			setEntity(r.save(getEntity()));
 			r.commitTransaction();
+			clear();
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 			r.rollbackTransaction();

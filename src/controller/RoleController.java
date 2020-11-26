@@ -13,7 +13,7 @@ import util.Util;
 
 @Named
 @ViewScoped
-public class RoleController extends Controller<Role> implements Serializable{
+public class RoleController extends Controller<Role> implements Serializable {
 
 	private static final long serialVersionUID = -2128767325055983632L;
 	
@@ -35,7 +35,14 @@ public class RoleController extends Controller<Role> implements Serializable{
 		}
 		else {
 			super.save();
+			Util.redirect("role.xhtml");
 		}
+	}
+	
+	@Override
+	public void delete() {
+		super.delete();
+		Util.redirect("role.xhtml");
 	}
 	
 

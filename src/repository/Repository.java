@@ -59,9 +59,7 @@ public class Repository<T extends DefaultEntity<? super T>> {
 	
 	public T save(T entity) throws ApplicationException, ValidationException {
 		try {
-			T em = getEntityManager().merge(entity);
-			Util.redirect("cargo.xhtml");
-			return em;
+			return getEntityManager().merge(entity);
 			
 		} catch (ValidationException e) {
 			System.out.println(e.getMessage());
@@ -80,10 +78,8 @@ public class Repository<T extends DefaultEntity<? super T>> {
 	
 	public void delete(T entity) throws ApplicationException {
 		try {
-			
 			T obj = getEntityManager().merge(entity);
-			getEntityManager().remove(obj);
-			Util.redirect("cargo.xhtml");
+			getEntityManager().remove(obj);	
 		} 
 		
 		catch (Exception e) {

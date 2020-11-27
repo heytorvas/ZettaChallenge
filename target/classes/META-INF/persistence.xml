@@ -5,6 +5,8 @@
 		<class>model.DefaultEntity</class>
 		<class>model.Role</class>
 		<class>model.Profile</class>
+		<class>model.Person</class>
+		<class>model.Customer</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.driver"

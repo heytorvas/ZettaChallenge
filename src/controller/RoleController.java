@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -35,14 +36,14 @@ public class RoleController extends Controller<Role> implements Serializable {
 		}
 		else {
 			super.save();
-			Util.redirect("role.xhtml");
+			Util.redirect("cargo.xhtml");
 		}
 	}
 	
 	@Override
 	public void delete() {
 		super.delete();
-		Util.redirect("role.xhtml");
+		Util.redirect("cargo.xhtml");
 	}
 	
 

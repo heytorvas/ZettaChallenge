@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<h:head>
+		<meta charset="utf-8" name="viewport"
+			content="width=device-width, initial-scale=1"
+			http-equiv="X-UA-Conpatible" />
+	</h:head>
+	<h:body>
+		<center>
+			<h:messages infoStyle="color:green" warnStyle="color:orange"
+				errorStyle="color:red" />
+			<h1>Cadastro de Usuario</h1>
+			<h:form id="formPrincipal">
+				<h:panelGrid id="panelPrincipal" columns="2">
+					<h:outputLabel value="Nome: " />
+					<h:inputText id="inputName"
+						value="#{customerController.entity.name}" />
+						
+					<h:outputLabel value="CPF: " />
+					<h:inputText id="inputCpf"
+						value="#{customerController.entity.cpf}" />
+						
+					<h:outputLabel value="Data de Nascimento: " />
+					<input id="inputBirthDate" type="date" class="form-control" 
+						jsf:value="#{customerController.entity.birthDate}" pattern="dd/MM/yyyy">
+							<f:convertDateTime type="Date" pattern="yyyy-MM-dd" />
+					</input>
+					
+					<h:outputLabel value="Sexo: " />
+					<h:selectOneMenu value="#{customerController.entity.gender}">
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione o sexo..." />
+						<f:selectItems value="#{customerController.genderList}"
+							var="gender" itemLabel="#{gender.label}" itemValue="#{gender}" />
+					</h:selectOneMenu>
+					
+					<h:outputLabel value="Cargo: " />
+					<h:selectOneMenu value="#{customerController.entity.role}">
+						<f:converter converterId="RoleConverter" />
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione o cargo..." />
+						<f:selectItems
+							value="#{customerController.roleList}"
+							var="obj" itemValue="#{obj}" itemLabel="#{obj.name}" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="4">
+					<h:commandButton value="Incluir"
+						disabled="#{customerController.entity.id != null}"
+						process="@form" update="@formDataTable" 
+						actionListener="#{customerController.save()}" />
+
+					<h:commandButton value="Alterar"
+						disabled="#{customerController.entity.id == null}"
+						process="@form" update="@formDataTable" 
+						actionListener="#{customerController.save()}" />
+
+
+					<h:commandButton value="Excluir"
+						disabled="#{customerController.entity.id == null}"
+						process="@form" update="@formDataTable" 
+						actionListener="#{customerController.delete()}" />
+
+					<h:commandButton value="Limpar"
+						actionListener="#{customerController.clear()}" />
+
+				</h:panelGrid>
+			</h:form>
+			
+			<h:form id="formDataTable">
+				<h:dataTable value="#{customerController.customerList}" var="obj"
+					styleClass="table" headerClass="table-header"
+					rowClasses="table-odd-row, table-even-row">
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+						<h:outputLabel value="#{obj.id}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:commandLink value="#{obj.name}" style="color: black;"
+							actionListener="#{customerController.edit(obj.id)}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Cpf</f:facet>
+						<h:outputLabel value="#{obj.cpf}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Data de Nascimento</f:facet>
+						<h:outputLabel value="#{obj.birthDate}">
+						</h:outputLabel>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Sexo</f:facet>
+						<h:outputLabel value="#{obj.gender.label}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Data de Cadastro</f:facet>
+						<h:outputLabel value="#{obj.registerDate}">
+							
+						</h:outputLabel>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Cargo</f:facet>
+						<h:outputLabel value="#{obj.role.name}">
+							
+						</h:outputLabel>
+					</h:column>
+
+				</h:dataTable>
+			</h:form>
+		</center>
+	</h:body>
+
+</html>

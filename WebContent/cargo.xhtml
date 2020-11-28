@@ -71,7 +71,7 @@
             	<div class="col-xs-12 col-xs-updated">
 					<h:form id="formDataTable">
 						<h:dataTable value="#{roleController.roleList}" var="obj"
-							styleClass="table" headerClass="table-header"
+							styleClass="table table-striped table-dark" headerClass="table-header"
 							rowClasses="table-odd-row, table-even-row">
 							<h:column>
 								<f:facet name="header">Id</f:facet>
@@ -80,14 +80,14 @@
 		
 							<h:column>
 								<f:facet name="header">Nome</f:facet>
-								<h:commandLink value="#{obj.name}" style="color: black;"
+								<h:commandLink value="#{obj.name}" style="color: white;"
 									actionListener="#{roleController.edit(obj.id)}" />
 							</h:column>
 		
 							<h:column>
 								<f:facet name="header">Data de Cadastro</f:facet>
 								<h:outputLabel value="#{obj.registerDate}">
-									
+									<f:convertDateTime pattern = "dd/MM/yyyy HH:mm:ss" />
 								</h:outputLabel>
 							</h:column>
 		

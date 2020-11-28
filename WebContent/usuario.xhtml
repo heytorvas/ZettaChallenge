@@ -49,9 +49,19 @@
 						<div class="form-group">
 							<h:outputLabel value="Data de Nascimento: " styleClass="control-label col-sm-5"/>
 							<input id="inputBirthDate" type="date" class="form-control" 
-								jsf:value="#{customerController.entity.birthDate}" pattern="dd/MM/yyyy">
-									<f:convertDateTime type="Date" pattern="yyyy-MM-dd" />
+								jsf:value="#{customerController.entity.birthDate}">,
+								<f:convertDateTime pattern = "yyyy-MM-dd"/>
 							</input>
+						</div>
+						
+						<div class="form-group">
+							<h:outputLabel value="Cargo: " styleClass="control-label col-sm-5"/>
+							<h:selectOneMenu value="#{customerController.entity.role}" styleClass="form-control">
+								<f:converter converterId="RoleConverter" />
+								<f:selectItems
+									value="#{customerController.roleList}"
+									var="obj" itemValue="#{obj}" itemLabel="#{obj.name}" />
+							</h:selectOneMenu>
 						</div>
 						
 						<div class="form-group">
@@ -103,7 +113,7 @@
             	<div class="col-xs-12 col-xs-updated">
 					<h:form id="formDataTable">
 						<h:dataTable value="#{customerController.customerList}" var="obj"
-							styleClass="table" headerClass="table-header"
+							styleClass="table table-striped table-dark" headerClass="table-header"
 							rowClasses="table-odd-row, table-even-row">
 							<h:column>
 								<f:facet name="header">Id</f:facet>
@@ -112,7 +122,7 @@
 		
 							<h:column>
 								<f:facet name="header">Nome</f:facet>
-								<h:commandLink value="#{obj.name}" style="color: black;"
+								<h:commandLink value="#{obj.name}" style="color: white;"
 									actionListener="#{customerController.edit(obj.id)}" />
 							</h:column>
 							
@@ -124,17 +134,13 @@
 							<h:column>
 								<f:facet name="header">Data de Nascimento</f:facet>
 								<h:outputLabel value="#{obj.birthDate}">
+									<f:convertDateTime pattern = "dd/MM/yyyy" />
 								</h:outputLabel>
 							</h:column>
 							
 							<h:column>
 								<f:facet name="header">Sexo</f:facet>
 								<h:outputLabel value="#{obj.gender.label}" />
-							</h:column>
-		
-							<h:column>
-								<f:facet name="header">Data de Cadastro</f:facet>
-								<h:outputLabel value="#{obj.registerDate}" />
 							</h:column>
 							
 							<h:column>
@@ -147,6 +153,13 @@
 								<ui:repeat var="obj" value="#{obj.profileList}">
 									#{obj.name}
 								</ui:repeat>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Data de Cadastro</f:facet>
+								<h:outputLabel value="#{obj.registerDate}" >
+									<f:convertDateTime pattern = "dd/MM/yyyy HH:mm:ss" />
+								</h:outputLabel>
 							</h:column>
 		
 						</h:dataTable>

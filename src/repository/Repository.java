@@ -27,7 +27,6 @@ public class Repository<T extends DefaultEntity<? super T>> {
 		try {
 			getEntityManager().getTransaction().begin();
 		} 
-		
 		catch (Exception e) {
 			e.printStackTrace();
 			throw new ApplicationException("Problema ao iniciar uma transacao.");
@@ -38,21 +37,17 @@ public class Repository<T extends DefaultEntity<? super T>> {
 		try {
 			getEntityManager().getTransaction().commit();
 		} 
-		
 		catch (Exception e) {
 			e.printStackTrace();
-			throw new ApplicationException("Problema ao fazer commit de uma transaÃ§Ã£o");
+			throw new ApplicationException("Problema ao fazer commit de uma transacao");
 		}
 	}
 	
 	public void rollbackTransaction() {
 		try {
-			
 			getEntityManager().getTransaction().rollback();
 		} 
-
 		catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 	}
@@ -60,11 +55,9 @@ public class Repository<T extends DefaultEntity<? super T>> {
 	public T save(T entity) throws ApplicationException, ValidationException {
 		try {
 			return getEntityManager().merge(entity);
-			
 		} catch (ValidationException e) {
 			System.out.println(e.getMessage());
 			throw e;
-		
 		} catch (OptimisticLockException e) {
 			e.printStackTrace();
 			throw new ApplicationException("Versão antiga. Erro de controle de concorrência.");
@@ -81,9 +74,7 @@ public class Repository<T extends DefaultEntity<? super T>> {
 			T obj = getEntityManager().merge(entity);
 			getEntityManager().remove(obj);	
 		} 
-		
 		catch (Exception e) {
-			
 			System.out.println("Erro no repositorio ao executar o metodo merge.");
 			e.printStackTrace();
 			throw new ApplicationException("Erro ao salvar.");
@@ -91,14 +82,10 @@ public class Repository<T extends DefaultEntity<? super T>> {
 	}
 	
 	public T findById(Integer id) {
-		// obtendo o tipo da classe de forma generica (a classe deve ser publica)
-		
 		final ParameterizedType type = (ParameterizedType) getClass().getGenericSuperclass(); 
 		Class<T> theType = (Class<T>) (type).getActualTypeArguments()[0];
 		
-		// pesquisando pelo id no banco
 		T t = (T) getEntityManager().find(theType, id);
-		
 		return t;
 	}
 

@@ -6,7 +6,6 @@ import javax.persistence.Persistence;
 
 public class JPAFactory {
 	
-	// Garante que a classe nao pode ser instanciada
 	private JPAFactory() {}
 	
 	private static EntityManagerFactory emf = 

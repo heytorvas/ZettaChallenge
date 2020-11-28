@@ -28,13 +28,13 @@ public abstract class DefaultEntity<T> implements Serializable {
 	private Date updateDate;
 	
 	@PrePersist
-	private void atualizarDadosAntesInsert() {
+	private void updateDateBeforeInsert() {
 		this.registerDate = new Date();
 		this.updateDate = this.registerDate;
 	}
 		
 	@PreUpdate
-	private void atualizarDadosAntesUpdate() {
+	private void updateDateBeforeUpdate() {
 		this.updateDate = new Date();
 	}
 
@@ -96,6 +96,4 @@ public abstract class DefaultEntity<T> implements Serializable {
 		return "DefaultEntity [id=" + id + ", registerDate=" + registerDate + ", updateDate=" + updateDate + "]";
 	}
 	
-	
-
 }

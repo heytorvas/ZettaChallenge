@@ -9,118 +9,151 @@
 		<meta charset="utf-8" name="viewport"
 			content="width=device-width, initial-scale=1"
 			http-equiv="X-UA-Conpatible" />
+		<h:outputStylesheet library="css" name="bootstrap.min.css" />
+		<title>Desafio Técnico - Zetta</title>
+		
+		<style type="text/css">
+	        .col-xs-updated {        
+	            width: 92% !important;
+        	}
+    	</style>
+    	
 	</h:head>
 	<h:body>
-		<center>
-			<h:messages infoStyle="color:green" warnStyle="color:orange"
-				errorStyle="color:red" />
-			<h1>Cadastro de Usuario</h1>
-			<h:form id="formPrincipal">
-				<h:panelGrid id="panelPrincipal" columns="2">
-					<h:outputLabel value="Nome: " />
-					<h:inputText id="inputName"
-						value="#{customerController.entity.name}" />
-						
-					<h:outputLabel value="CPF: " />
-					<h:inputText id="inputCpf"
-						value="#{customerController.entity.cpf}" />
-						
-					<h:outputLabel value="Data de Nascimento: " />
-					<input id="inputBirthDate" type="date" class="form-control" 
-						jsf:value="#{customerController.entity.birthDate}" pattern="dd/MM/yyyy">
-							<f:convertDateTime type="Date" pattern="yyyy-MM-dd" />
-					</input>
-					
-					<h:outputLabel value="Sexo: " />
-					<h:selectOneMenu value="#{customerController.entity.gender}">
-						<f:selectItem noSelectionOption="true" itemLabel="Selecione o sexo..." />
-						<f:selectItems value="#{customerController.genderList}"
-							var="gender" itemLabel="#{gender.label}" itemValue="#{gender}" />
-					</h:selectOneMenu>
-					
-					<h:outputLabel value="Cargo: " />
-					<h:selectOneMenu value="#{customerController.entity.role}">
-						<f:converter converterId="RoleConverter" />
-						<f:selectItem noSelectionOption="true"
-							itemLabel="Selecione o cargo..." />
-						<f:selectItems
-							value="#{customerController.roleList}"
-							var="obj" itemValue="#{obj}" itemLabel="#{obj.name}" />
-					</h:selectOneMenu>
-
-				</h:panelGrid>
-
-				<h:panelGrid columns="4">
-					<h:commandButton value="Incluir"
-						disabled="#{customerController.entity.id != null}"
-						process="@form" update="@formDataTable" 
-						actionListener="#{customerController.save()}" />
-
-					<h:commandButton value="Alterar"
-						disabled="#{customerController.entity.id == null}"
-						process="@form" update="@formDataTable" 
-						actionListener="#{customerController.save()}" />
-
-
-					<h:commandButton value="Excluir"
-						disabled="#{customerController.entity.id == null}"
-						process="@form" update="@formDataTable" 
-						actionListener="#{customerController.delete()}" />
-
-					<h:commandButton value="Limpar"
-						actionListener="#{customerController.clear()}" />
-
-				</h:panelGrid>
-			</h:form>
+		<div class="container">
 			
-			<h:form id="formDataTable">
-				<h:dataTable value="#{customerController.customerList}" var="obj"
-					styleClass="table" headerClass="table-header"
-					rowClasses="table-odd-row, table-even-row">
-					<h:column>
-						<f:facet name="header">Id</f:facet>
-						<h:outputLabel value="#{obj.id}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Nome</f:facet>
-						<h:commandLink value="#{obj.name}" style="color: black;"
-							actionListener="#{customerController.edit(obj.id)}" />
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Cpf</f:facet>
-						<h:outputLabel value="#{obj.cpf}" />
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Data de Nascimento</f:facet>
-						<h:outputLabel value="#{obj.birthDate}">
-						</h:outputLabel>
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Sexo</f:facet>
-						<h:outputLabel value="#{obj.gender.label}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Data de Cadastro</f:facet>
-						<h:outputLabel value="#{obj.registerDate}">
+			<ui:insert name="header">
+            	<ui:include src="resources/templates/header.xhtml" />
+        	</ui:insert>
+        	
+        	<br/>
+        	<h3>Cadastro de Usuário</h3>
+        	<br/>
+        	
+        	<div class="row">
+            	<div class="col-xs-12 col-xs-updated">
+            		<h:messages infoStyle="color:green" warnStyle="color:orange" errorStyle="color:red" />
+			
+					<h:form id="formPrincipal" styleClass="form-horizontal">
+						<div class="form-group">
+							<h:outputLabel value="Nome: " styleClass="control-label col-sm-5"/>
+							<h:inputText id="inputName"
+								value="#{customerController.entity.name}" styleClass="form-control"/>
+						</div>
+						<div class="form-group">
+							<h:outputLabel value="CPF: " styleClass="control-label col-sm-5"/>
+							<h:inputText id="inputCpf"
+								value="#{customerController.entity.cpf}" styleClass="form-control" />
+						</div>
 							
-						</h:outputLabel>
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Cargo</f:facet>
-						<h:outputLabel value="#{obj.role.name}">
+						<div class="form-group">
+							<h:outputLabel value="Data de Nascimento: " styleClass="control-label col-sm-5"/>
+							<input id="inputBirthDate" type="date" class="form-control" 
+								jsf:value="#{customerController.entity.birthDate}" pattern="dd/MM/yyyy">
+									<f:convertDateTime type="Date" pattern="yyyy-MM-dd" />
+							</input>
+						</div>
+						
+						<div class="form-group">
+							<h:outputLabel value="Sexo: " styleClass="control-label col-sm-5"/>
+							<h:selectOneMenu value="#{customerController.entity.gender}" class="form-control">
+								<f:selectItems value="#{customerController.genderList}"
+									var="gender" itemLabel="#{gender.label}" itemValue="#{gender}" />
+							</h:selectOneMenu>
+						</div>
+						
+						<div class="form-group">
+							<h:outputLabel value="Perfil: " styleClass="control-label col-sm-5"/>
+							<h:selectManyCheckbox value="#{customerController.selectedProfiles}" class="form-control">
+								<f:converter converterId="ProfileConverter" />
+		            			<f:selectItems value="#{profileController.profileList}" var="profile"
+		                           itemLabel="#{profile.name}" itemValue="#{profile}"/>
+		                   	</h:selectManyCheckbox>
+						</div>
 							
-						</h:outputLabel>
-					</h:column>
-
-				</h:dataTable>
-			</h:form>
-		</center>
+		
+						<h:panelGrid columns="4">
+							<h:commandButton value="Incluir" styleClass="btn btn-primary"
+								disabled="#{customerController.entity.id != null}"
+								process="@form" update="@formDataTable" 
+								actionListener="#{customerController.save()}" />
+		
+							<h:commandButton value="Alterar" styleClass="btn btn-warning"
+								disabled="#{customerController.entity.id == null}"
+								process="@form" update="@formDataTable" 
+								actionListener="#{customerController.save()}" />
+		
+		
+							<h:commandButton value="Excluir" styleClass="btn btn-danger"
+								disabled="#{customerController.entity.id == null}"
+								process="@form" update="@formDataTable" 
+								actionListener="#{customerController.delete()}" />
+		
+							<h:commandButton value="Limpar" styleClass="btn btn-secondary"
+								actionListener="#{customerController.clear()}" />
+		
+						</h:panelGrid>
+					</h:form>
+            	</div>
+            </div>
+            
+            <br/>
+		
+			<div class="row">
+            	<div class="col-xs-12 col-xs-updated">
+					<h:form id="formDataTable">
+						<h:dataTable value="#{customerController.customerList}" var="obj"
+							styleClass="table" headerClass="table-header"
+							rowClasses="table-odd-row, table-even-row">
+							<h:column>
+								<f:facet name="header">Id</f:facet>
+								<h:outputLabel value="#{obj.id}" />
+							</h:column>
+		
+							<h:column>
+								<f:facet name="header">Nome</f:facet>
+								<h:commandLink value="#{obj.name}" style="color: black;"
+									actionListener="#{customerController.edit(obj.id)}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Cpf</f:facet>
+								<h:outputLabel value="#{obj.cpf}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Data de Nascimento</f:facet>
+								<h:outputLabel value="#{obj.birthDate}">
+								</h:outputLabel>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Sexo</f:facet>
+								<h:outputLabel value="#{obj.gender.label}" />
+							</h:column>
+		
+							<h:column>
+								<f:facet name="header">Data de Cadastro</f:facet>
+								<h:outputLabel value="#{obj.registerDate}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Cargo</f:facet>
+								<h:outputLabel value="#{obj.role.name}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Perfil</f:facet>
+								<ui:repeat var="obj" value="#{obj.profileList}">
+									#{obj.name}
+								</ui:repeat>
+							</h:column>
+		
+						</h:dataTable>
+					</h:form>
+				</div>
+			</div>
+		</div>
 	</h:body>
 
 </html>

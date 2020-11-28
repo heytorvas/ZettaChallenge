@@ -9,68 +9,92 @@
 		<meta charset="utf-8" name="viewport"
 			content="width=device-width, initial-scale=1"
 			http-equiv="X-UA-Conpatible" />
+		<h:outputStylesheet library="css" name="bootstrap.min.css" />
+		<title>Desafio Técnico - Zetta</title>
+		
+		<style type="text/css">
+	        .col-xs-updated {        
+	            width: 92% !important;
+        	}
+    	</style>
+    	
 	</h:head>
 	<h:body>
-		<center>
-			<h:messages infoStyle="color:green" warnStyle="color:orange"
-				errorStyle="color:red" />
-			<h1>Cadastro de Cargo</h1>
-			<h:form id="formPrincipal">
-				<h:panelGrid id="panelPrincipal" columns="2">
-					<h:outputLabel value="Nome: " />
-					<h:inputText id="inputName"
-						value="#{roleController.entity.name}" />
-
-				</h:panelGrid>
-
-				<h:panelGrid columns="4">
-					<h:commandButton value="Incluir"
-						disabled="#{roleController.entity.id != null}"
-						process="@form" update="@formDataTable" 
-						actionListener="#{roleController.save()}" />
-
-					<h:commandButton value="Alterar"
-						disabled="#{roleController.entity.id == null}"
-						process="@form" update="@formDataTable" 
-						actionListener="#{roleController.save()}" />
-
-
-					<h:commandButton value="Excluir"
-						disabled="#{roleController.entity.id == null}"
-						process="@form" update="@formDataTable" 
-						actionListener="#{roleController.delete()}" />
-
-					<h:commandButton value="Limpar"
-						actionListener="#{roleController.clear()}" />
-
-				</h:panelGrid>
-			</h:form>
+		<div class="container">
+		
+			<ui:insert name="header">
+            	<ui:include src="resources/templates/header.xhtml" />
+        	</ui:insert>
+        	
+        	<br/>
+        	<h3>Cadastro de Cargo</h3>
+        	<br/>
+        	
+        	<div class="row">
+            	<div class="col-xs-12 col-xs-updated">
+            		<h:messages infoStyle="color:green" warnStyle="color:orange" errorStyle="color:red" />
+            		
+            		<h:form id="formPrincipal" styleClass="form-horizontal">
+            			<h:outputLabel value="Nome: " styleClass="control-label col-sm-5"/>
+						<h:inputText id="inputName" styleClass="form-control"
+							value="#{roleController.entity.name}" />
+						
+						<br />
+						<h:panelGrid columns="4">
+							<h:commandButton value="Incluir" styleClass="btn btn-primary"
+								disabled="#{roleController.entity.id != null}"
+								process="@form" update="@formDataTable" 
+								actionListener="#{roleController.save()}" />
+		
+							<h:commandButton value="Alterar" styleClass="btn btn-warning"
+								disabled="#{roleController.entity.id == null}"
+								process="@form" update="@formDataTable" 
+								actionListener="#{roleController.save()}" />
+		
+		
+							<h:commandButton value="Excluir" styleClass="btn btn-danger"
+								disabled="#{roleController.entity.id == null}"
+								process="@form" update="@formDataTable" 
+								actionListener="#{roleController.delete()}" />
+		
+							<h:commandButton value="Limpar" styleClass="btn btn-secondary"
+								actionListener="#{roleController.clear()}" />
+		
+						</h:panelGrid>
+					</h:form>
+            	</div>
+            </div>
+            
+            <br />
 			
-			<h:form id="formDataTable">
-				<h:dataTable value="#{roleController.roleList}" var="obj"
-					styleClass="table" headerClass="table-header"
-					rowClasses="table-odd-row, table-even-row">
-					<h:column>
-						<f:facet name="header">Id</f:facet>
-						<h:outputLabel value="#{obj.id}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Nome</f:facet>
-						<h:commandLink value="#{obj.name}" style="color: black;"
-							actionListener="#{roleController.edit(obj.id)}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Data de Cadastro</f:facet>
-						<h:outputLabel value="#{obj.registerDate}">
-							
-						</h:outputLabel>
-					</h:column>
-
-				</h:dataTable>
-			</h:form>
-		</center>
+			<div class="row">
+            	<div class="col-xs-12 col-xs-updated">
+					<h:form id="formDataTable">
+						<h:dataTable value="#{roleController.roleList}" var="obj"
+							styleClass="table" headerClass="table-header"
+							rowClasses="table-odd-row, table-even-row">
+							<h:column>
+								<f:facet name="header">Id</f:facet>
+								<h:outputLabel value="#{obj.id}" />
+							</h:column>
+		
+							<h:column>
+								<f:facet name="header">Nome</f:facet>
+								<h:commandLink value="#{obj.name}" style="color: black;"
+									actionListener="#{roleController.edit(obj.id)}" />
+							</h:column>
+		
+							<h:column>
+								<f:facet name="header">Data de Cadastro</f:facet>
+								<h:outputLabel value="#{obj.registerDate}">
+									
+								</h:outputLabel>
+							</h:column>
+		
+						</h:dataTable>
+					</h:form>
+				</div>
+			</div>
+		</div>
 	</h:body>
-
 </html>

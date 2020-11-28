@@ -1,0 +1,23 @@
+INSTRUÇÕES:
+
+- POSTGRESQL (src/META-INF/persistence.xml)
+  * banco: zettachallenge
+  * porta: 5432
+  * usuario: postgres
+  * senha: 123456
+  * propriedade: create-drop
+
+- JAVA
+  * versão: 15.0.1
+  * maven
+  * hibernate (JPA)
+
+- SERVIDOR
+  * Apache Tomcat
+  * versão 9.0
+
+- LINK GITHUB: 
+https://github.com/heytorvas/ZettaChallenge
+
+- LINK YOUTUBE:
+https://youtu.be/k9WX5jgSldw
